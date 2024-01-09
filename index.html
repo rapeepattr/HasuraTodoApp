@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" type="image/jpg" href="Favicon_Image_Location" />
+    <title>Todo app</title>
+</head>
+
+<body>
+    <navbar>
+        <p class="navbar-header">GraphQL Tutorial App</p>
+    </navbar>
+
+    <section class="dashboard">
+        <section class="personal-todos">
+            <div class="member">
+                <div class="member-header">
+                    <p>Made by</p>
+                </div>
+
+                <div class="member-name">
+                    <p class="member-fullname">Rapeepat Treerattrakul</p>
+                    <p class="member-code">640510677</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="public-todos">
+            <div>
+                <p class="public-todos-header">Public feed</p>
+                <p class="public-todos-secondary">Real time public feed</p>
+            </div>
+
+            <form id="myForm" class="myForm">
+                <div class="userForm">
+                    <!-- Name -->
+                    <input type="text" id="name" name="name" placeholder="Your name" class="name-form"
+                        onkeydown="if (event.key === 'Enter') { event.preventDefault(); addTask(); }">
+                    <!-- Tasks -->
+                    <input type="text" id="content" name="content" placeholder="What Do You Want to Do?"
+                        class="task-form" onkeydown="if (event.key === 'Enter') { event.preventDefault(); addTask(); }">
+                </div>
+            </form>
+
+            <div id="messageContainer"></div>
+
+        </section>
+
+        <section class="datetime">
+            <div class="calendar">
+                <p class="calendar-date" id="date"></p>
+                <p class="calendar-month" id="month"></p>
+            </div>
+        </section>
+    </section>
+
+    <script>
+        const endpoint = "https://eminent-lioness-82.hasura.app/api/rest/addtask";
+        const headers = {
+            "Content-Type": "application/json",
+            "x-hasura-admin-secret":
+                "4DZBa4yEGaDOrgidg2IxgmMwKJP55DIyT6hPtJF8OTdg5h3M9opWNCrzsikJtnDy",
+        };
+
+        function loadTask() {
+            document.getElementById("messageContainer").innerHTML = "";
+
+            fetch("https://eminent-lioness-82.hasura.app/api/rest/loadtask")
+                .then((response) => response.json())
+                .then((data) => {
+                    data.task.forEach(todo => {
+                        // Create new div for each todo
+                        var newDiv = document.createElement("div");
+                        newDiv.className = "public-todos__task-box";
+
+                        // Create inner elements
+                        var taskNameDiv = document.createElement("div");
+                        taskNameDiv.className = "public-todos__username";
+                        taskNameDiv.textContent = '@' + todo.name;
+
+                        var taskDescP = document.createElement("p");
+                        taskDescP.className = "public-todos__task-desc";
+                        taskDescP.textContent = todo.task;
+
+                        // Append inner elements to the new div
+                        newDiv.appendChild(taskNameDiv);
+                        newDiv.appendChild(taskDescP);
+
+                        // Get the container
+                        var container = document.getElementById("messageContainer");
+
+                        // Insert the new div at the beginning of the container
+                        container.insertBefore(newDiv, container.firstChild);
+                    });
+                });
+        }
+
+        function addTask() {
+
+            var taskName = document.getElementById('content').value;
+            var userName = document.getElementById('name').value;
+
+            if (userName == '') {
+                userName = 'anonymous'
+            }
+
+            var data = {
+                id: Math.random().toString(16).slice(2),
+                name: userName,
+                task: taskName,
+            };
+
+            console.log(data)
+
+            fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                    document.getElementById("name").value = "";
+                    document.getElementById("content").value = "";
+                    loadTask(); // Call loadTask after successfully adding a task
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+
+            // document.getElementById("name").value = "";
+            // document.getElementById("content").value = "";
+
+            // loadTask()
+        }
+
+        loadTask()
+
+        const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ];
+
+        const currentDate = new Date();
+
+        const currentDateTime = currentDate.toLocaleString();
+        document.querySelector('#date').textContent = (currentDateTime.toLocaleString()).split('/')[0];
+        document.querySelector('#month').textContent = months[new Date().getMonth()];
+
+    </script>
+</body>
+
+</html>

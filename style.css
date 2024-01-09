@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+* {
+    font-family: 'Poppins', 'Bai Jamjuree';
+    /* padding: 0;
+    margin: 0; */
+}
+
+body {
+    margin: 0;
+}
+
+navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5% 1.5%;
+    color: #fff;
+    background-color: #000;
+    height: 6vh;
+    text-align: center;
+
+    width: 100%;
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+}
+
+.navbar-header {
+    font-weight: 500;
+}
+
+.logout-btn {
+    background-color: #0065FF;
+    border: none;
+    padding: 1% 2%;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.dashboard {
+    margin-top: 6vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.personal-todos,
+.public-todos,
+.online-users {
+    height: 100%;
+    padding: 2% 3%;
+    height: 100vh;
+}
+
+.personal-todos {
+    width: 15rem;
+    /* background-color: #f8f9fa; */
+}
+
+.member {
+    padding: 1rem 0;
+}
+
+.member-header {
+    /* background-color: #f6f5f8; */
+    text-align: left;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+.member-name {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+.member-fullname {
+    font-weight: 400;
+    margin: 0;
+}
+
+.member-code {
+    margin: 0;
+    font-weight: 200;
+}
+
+.personal-todos__options {
+    display: flex;
+    font-size: smaller;
+    font-weight: 200;
+    gap: 5%;
+}
+
+input {
+    padding: 1% 5%;
+    width: 30vh;
+    height: 5vh;
+    border: 1px solid #ced4da;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    font-size: 2vh;
+}
+
+.name-form {
+    width: 15vh;
+    margin: 0;
+}
+
+.task-form {
+    width: 56vh;
+    margin: 0;
+}
+
+.myForm {
+    margin-bottom: 1.5rem;
+}
+
+.userForm {
+    padding: 0.2rem;
+    gap: 0.5rem;
+    display: flex;   
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+}
+
+.public-todos {
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f5f8;
+    width: 50%;
+    height: 100vh;
+}
+
+.public-todos-header {
+    font-weight: 400;
+    font-size: 3vh;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.public-todos-secondary {
+    font-weight: 200;
+    font-size: 2vh;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 5vh;
+}
+
+.public-todos__task-box {
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    padding: 0.1vh 2vh;
+    width: 50vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    margin-bottom: 0.5rem;
+}
+
+.public-todos__task-desc {
+    font-size: 2vh;
+    font-weight: 200;
+}
+
+.public-todos__username {
+    font-size: 2vh;
+    font-weight: bold;
+    padding: 1%;
+    /* background-color: #ced4da; */
+}
+
+.datetime {
+    width: 10rem;
+    background-color: #fff;
+}
+
+.calendar {
+    margin-top: 3rem;
+    margin-left: 3rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+.calendar-date {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.calendar-month {
+    margin: 0;
+}
